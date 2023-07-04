@@ -18,6 +18,11 @@
 <slot />
 
 <style>
+	:global(body) {
+		font-size: 100%;
+		font-family: Helvetica;
+	}
+
 	nav {
 		list-style-type: none;
 		margin: 0;
