@@ -1,19 +1,6 @@
 <script>
-	let tasks = [
-		{
-			id: 1,
-			title: 'ДЗ Математика',
-			description: 'Сделать ДЗ по математике, пример №8',
-			done: false
-		},
-		{
-			id: 2,
-			title: 'ДЗ Русский язык',
-			description:
-				'Сделать ДЗ по русскому языку, прочитать параграф про сложносочинённые предложения, выполнить упражнение №234',
-			done: false
-		}
-	];
+	/** @type {import('./$types').PageData} */
+	export let data;
 </script>
 
 <table>
@@ -23,7 +10,7 @@
 		<th>Описание</th>
 		<th>Сделано</th>
 	</tr>
-	{#each tasks as task}
+	{#each data.tasks as task}
 		<tr>
 			<td> {task.id} </td>
 			<td> {task.title} </td>
@@ -122,29 +109,5 @@
 
 	td:last-child {
 		border-right: 0px;
-	}
-
-	th.text-left {
-		text-align: left;
-	}
-
-	th.text-center {
-		text-align: center;
-	}
-
-	th.text-right {
-		text-align: right;
-	}
-
-	td.text-left {
-		text-align: left;
-	}
-
-	td.text-center {
-		text-align: center;
-	}
-
-	td.text-right {
-		text-align: right;
 	}
 </style>
