@@ -1,18 +1,23 @@
 <script>
-	let current = 'todolist';
+	import { page } from '$app/stores';
+
+	let menuItems = [
+		{ href: '/todolist', title: 'Список задач' },
+		{ href: '/todolist/add', title: 'Добавить задачу' }
+	];
+
+	let current = $page.url.pathname;
 </script>
 
 <nav>
-	<a
-		class={current === 'todolist' ? 'active' : ''}
-		on:click={() => (current = 'todolist')}
-		href="/todolist">Список задач</a
-	>
-	<a
-		class={current === 'add' ? 'active' : ''}
-		on:click={() => (current = 'add')}
-		href="/todolist/add">Добавить задачу</a
-	>
+	{#each menuItems as item}
+		<a
+			class={current === item.href ? 'active' : ''}
+			on:click={() => (current = item.href)}
+			href={item.href}
+			aria-current={current === item.href}>{item.title}</a
+		>
+	{/each}
 </nav>
 
 <slot />
