@@ -1,14 +1,14 @@
-<form action="/TODO" method="post">
+<form action="?/add" method="POST">
 	<div>
 		<label for="title">Заголовок: </label>
-		<input type="text" id="title" name="title" />
+		<input type="text" id="title" name="title" required />
 	</div>
 	<div>
 		<label for="description">Описание:</label>
-		<textarea id="description" name="description" />
+		<textarea id="description" name="description" required />
 	</div>
 	<div>
-		<button type="submit">Добоавить</button>
+		<button type="submit">Добавить</button>
 	</div>
 </form>
 
