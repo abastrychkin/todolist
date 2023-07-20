@@ -1,6 +1,24 @@
 <script>
 	/** @type {import('./$types').PageData} */
 	export let data;
+
+	async function handleRowDbkClick(event) {
+		let id = event.target.parentNode.firstChild.innerText;
+
+		let response = await fetch(`http://localhost:3000/todolist-server/${id}/toggle-done`, {
+			method: 'POST'
+		});
+
+		if (response.ok) {
+			// если HTTP-статус в диапазоне 200-299
+			// получаем тело ответа (см. про этот метод ниже)
+			let changedTask = await response.json();
+
+			event.target.parentNode.lastElementChild.innerText = changedTask.done ? 'Да' : 'Нет';
+		} else {
+			alert('Ошибка HTTP: ' + response.status);
+		}
+	}
 </script>
 
 <table>
@@ -11,7 +29,7 @@
 		<th>Сделано</th>
 	</tr>
 	{#each data.tasks as task}
-		<tr>
+		<tr on:dblclick={handleRowDbkClick}>
 			<td> {task._id} </td>
 			<td> {task.title} </td>
 			<td> {task.description} </td>
