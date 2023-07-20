@@ -3,7 +3,8 @@
 	export let data;
 
 	async function handleRowDbkClick(event) {
-		let id = event.target.parentNode.firstChild.innerText;
+		let selectedRow = event.target.parentNode;
+		let id = selectedRow.firstChild.innerText;
 
 		let response = await fetch(`http://localhost:3000/todolist-server/${id}/toggle-done`, {
 			method: 'POST'
@@ -14,7 +15,7 @@
 			// получаем тело ответа (см. про этот метод ниже)
 			let changedTask = await response.json();
 
-			event.target.parentNode.lastElementChild.innerText = changedTask.done ? 'Да' : 'Нет';
+			selectedRow.lastElementChild.innerText = changedTask.done ? 'Да' : 'Нет';
 		} else {
 			alert('Ошибка HTTP: ' + response.status);
 		}
