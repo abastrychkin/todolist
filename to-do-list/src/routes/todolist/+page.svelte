@@ -1,4 +1,6 @@
 <script>
+	import { Tooltip, tooltip } from '@svelte-plugins/tooltips';
+
 	/** @type {import('./$types').PageData} */
 	export let data;
 
@@ -22,22 +24,31 @@
 	}
 </script>
 
-<table>
-	<tr>
-		<th>id</th>
-		<th>Заголовок</th>
-		<th>Описание</th>
-		<th>Сделано</th>
-	</tr>
-	{#each data.tasks as task}
-		<tr on:dblclick={handleRowDbkClick}>
-			<td> {task._id} </td>
-			<td> {task.title} </td>
-			<td> {task.description} </td>
-			<td> {task.done ? 'Да' : 'Нет'} </td>
+<div>
+	<table
+		class="noselect"
+		use:tooltip={{
+			content: '<b>Действия</b><p>Двойной клик - изменение статуса задачи</p>',
+			position: 'right',
+			animation: 'slide'
+		}}
+	>
+		<tr>
+			<th>id</th>
+			<th>Заголовок</th>
+			<th>Описание</th>
+			<th>Сделано</th>
 		</tr>
-	{/each}
-</table>
+		{#each data.tasks as task}
+			<tr on:dblclick={handleRowDbkClick}>
+				<td> {task._id} </td>
+				<td> {task.title} </td>
+				<td> {task.description} </td>
+				<td> {task.done ? 'Да' : 'Нет'} </td>
+			</tr>
+		{/each}
+	</table>
+</div>
 
 <style>
 	/*** Table Styles **/
@@ -128,5 +139,15 @@
 
 	td:last-child {
 		border-right: 0px;
+	}
+
+	.noselect {
+		-webkit-touch-callout: none; /* iOS Safari */
+		-webkit-user-select: none; /* Safari */
+		-khtml-user-select: none; /* Konqueror HTML */
+		-moz-user-select: none; /* Old versions of Firefox */
+		-ms-user-select: none; /* Internet Explorer/Edge */
+		user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome, Edge, Opera and Firefox */
 	}
 </style>
