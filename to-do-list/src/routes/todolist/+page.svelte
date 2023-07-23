@@ -8,18 +8,22 @@
 		let selectedRow = event.target.parentNode;
 		let id = selectedRow.firstChild.innerText;
 
-		let response = await fetch(`http://localhost:3000/todolist-server/${id}/toggle-done`, {
-			method: 'POST'
-		});
+		try {
+			let response = await fetch(`http://localhost:3000/todolist-server/${id}/toggle-done`, {
+				method: 'POST'
+			});
 
-		if (response.ok) {
-			// если HTTP-статус в диапазоне 200-299
-			// получаем тело ответа (см. про этот метод ниже)
-			let changedTask = await response.json();
+			if (response.ok) {
+				let changedTask = await response.json();
 
-			selectedRow.lastElementChild.innerText = changedTask.done ? 'Да' : 'Нет';
-		} else {
-			alert('Ошибка HTTP: ' + response.status);
+				selectedRow.lastElementChild.innerText = changedTask.done ? 'Да' : 'Нет';
+			} else {
+				alert('Ошибка HTTP: ' + response.status);
+			}
+
+		} catch (error) {
+			console.log('There was an error', error);
+			alert("Ошибка (дополнительная информация в консоли)")
 		}
 	}
 </script>
