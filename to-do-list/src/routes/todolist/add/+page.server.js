@@ -1,3 +1,5 @@
+import { serverInfo } from '/src/config/serverInfo';
+
 /** @type {import('./$types').Actions} */
 export const actions = {
     add: async({ request }) => {
@@ -7,7 +9,7 @@ export const actions = {
         let response;
 
         try {
-            response = await fetch('http://localhost:3000/todolist-server/add', {
+            response = await fetch(`${serverInfo.url}/todolist-server/add`, {
                 method: 'POST',
                 body: data
             });

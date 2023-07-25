@@ -1,5 +1,6 @@
 <script>
 	import { Tooltip, tooltip } from '@svelte-plugins/tooltips';
+	import { serverInfo } from '/src/config/serverInfo';
 
 	/** @type {import('./$types').PageData} */
 	export let data;
@@ -9,7 +10,7 @@
 		let id = selectedRow.firstChild.innerText;
 
 		try {
-			let response = await fetch(`http://localhost:3000/todolist-server/${id}/toggle-done`, {
+			let response = await fetch(`${serverInfo.url}/${id}/toggle-done`, {
 				method: 'POST'
 			});
 
@@ -20,10 +21,9 @@
 			} else {
 				alert('Ошибка HTTP: ' + response.status);
 			}
-
 		} catch (error) {
 			console.log('There was an error', error);
-			alert("Ошибка (дополнительная информация в консоли)")
+			alert('Ошибка (дополнительная информация в консоли)');
 		}
 	}
 </script>
