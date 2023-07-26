@@ -10,8 +10,11 @@
 		let id = selectedRow.firstChild.innerText;
 
 		try {
-			let response = await fetch(`${serverInfo.url}/${id}/toggle-done`, {
-				method: 'POST'
+			let response = await fetch(`${serverInfo.url}/todolist-server/${id}/toggle-done`, {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'x-www-form-urlencoded'
+				}
 			});
 
 			if (response.ok) {
