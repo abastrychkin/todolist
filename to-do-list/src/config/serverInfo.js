@@ -1,3 +1,3 @@
 export const serverInfo = {
-    url: "https://todolist-vercel-eight.vercel.app/"
+    url: "https://todolist-vercel-eight.vercel.app"
 }
