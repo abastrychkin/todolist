@@ -18,9 +18,10 @@
 			});
 
 			if (response.ok) {
-				let changedTask = await response.json();
+				let changedTask = response.body;
 
 				if (changedTask != 'NOT_FOUND') {
+					changedTask = await response.json();
 					selectedRow.lastElementChild.innerText = changedTask.done ? 'Да' : 'Нет';
 				} else {
 					alert('Задание не найдено');
