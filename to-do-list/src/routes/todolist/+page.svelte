@@ -20,7 +20,11 @@
 			if (response.ok) {
 				let changedTask = await response.json();
 
-				selectedRow.lastElementChild.innerText = changedTask.done ? 'Да' : 'Нет';
+				if (changedTask != 'NOT_FOUND') {
+					selectedRow.lastElementChild.innerText = changedTask.done ? 'Да' : 'Нет';
+				} else {
+					alert('Задание не найдено');
+				}
 			} else {
 				alert('Ошибка HTTP: ' + response.status);
 			}
