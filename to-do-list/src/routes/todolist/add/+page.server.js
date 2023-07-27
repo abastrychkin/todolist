@@ -1,4 +1,5 @@
 import { serverInfo } from '/src/config/serverInfo';
+import { redirect } from "@sveltejs/kit";
 
 /** @type {import('./$types').Actions} */
 export const actions = {
@@ -13,11 +14,12 @@ export const actions = {
                 method: 'POST',
                 body: data
             });
-            return { success: true };
         } catch (error) {
             console.log('There was an error', error);
         }
 
-
+        if (response.ok) {
+            throw redirect(303, "/todolist");
+        }
     }
 };
